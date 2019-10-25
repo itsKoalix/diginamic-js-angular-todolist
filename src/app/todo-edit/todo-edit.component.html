@@ -1,0 +1,23 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">{{ todo.id == 0 ? "Ajout" : "Modification" }} d'une tâche</h1>
+        <p class="lead">Utiliser le formulaire suivant afin {{ todo.id == 0 ? "d'ajouter" : "de modifier" }} une tâche
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <form (ngSubmit)="addToDo()" #todoForm="ngForm"> <!-- Gérer ici l'appel à la méthode addTodo() à la soumission du formulaire -->
+        <input type="hidden" name="idInput" id="ngModel" [(ngModel)]="todo.id"> <!-- Lier ce champ à la propriété id de la tâche -->
+        <div class="form-group">
+            <label for="labelInput">Label</label>
+            <input type="text" class="form-control" name="labelInput" id="labelInput"
+                placeholder="Entrer un label pour la tâche" required #label="ngModel" [(ngModel)]="todo.label"> <!-- Lier ce champ à la propriété label de la tâche -->
+            <div *ngIf="label.dirty && label.hasError('required')" class="alert alert-danger mt-2" role="alert">
+                <strong>Le label est obligatoire !</strong>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary"
+            [disabled]="todoForm.invalid">{{ todo.id == 0 ? "Ajouter" : "Modifier" }}</button>
+    </form>
+</div>
