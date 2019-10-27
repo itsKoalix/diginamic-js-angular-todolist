@@ -42,10 +42,9 @@ export class TodoListService {
 
     // reset les id
     this.todolist.forEach(function(todo){
-      if(todo.id > id){
+      if(todo.id > id)
         todo.id -= 1;
-      }
-    })
+    });
   }
   
   editIsDone(todo : TodoModel){
