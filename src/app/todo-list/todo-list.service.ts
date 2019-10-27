@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TodoModel } from './todo.model';
 import { Todos } from './todo.model';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +36,19 @@ export class TodoListService {
     if(this.get(todo.id) != null)
       this.get(todo.id).label = todo.label;
   }
-
+    
   delete(id : number){
     this.todolist = this.todolist.filter(t => t.id != id);
+
+    // reset les id
+    this.todolist.forEach(function(todo){
+      if(todo.id > id){
+        todo.id -= 1;
+      }
+    })
+  }
+  
+  editIsDone(todo : TodoModel){
+    this.get(todo.id).isDone = !this.get(todo.id).isDone;
   }
 }

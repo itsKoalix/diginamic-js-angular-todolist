@@ -7,12 +7,12 @@
 </div>
 
 <div class="container">
-    <form (ngSubmit)="addToDo()" #todoForm="ngForm"> <!-- Gérer ici l'appel à la méthode addTodo() à la soumission du formulaire -->
-        <input type="hidden" name="idInput" id="ngModel" [(ngModel)]="todo.id"> <!-- Lier ce champ à la propriété id de la tâche -->
+    <form (ngSubmit)="addToDo()" #todoForm="ngForm"> 
+        <input type="hidden" name="idInput" id="ngModel" [(ngModel)]="todo.id"> 
         <div class="form-group">
             <label for="labelInput">Label</label>
             <input type="text" class="form-control" name="labelInput" id="labelInput"
-                placeholder="Entrer un label pour la tâche" required #label="ngModel" [(ngModel)]="todo.label"> <!-- Lier ce champ à la propriété label de la tâche -->
+                placeholder="Entrer un label pour la tâche" required #label="ngModel" [(ngModel)]="todo.label">
             <div *ngIf="label.dirty && label.hasError('required')" class="alert alert-danger mt-2" role="alert">
                 <strong>Le label est obligatoire !</strong>
             </div>

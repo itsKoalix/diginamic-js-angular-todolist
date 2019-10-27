@@ -5,30 +5,31 @@
     </div>
 </div>
 
-<table class="table table-striped">
+<table class="table">
     <thead class="">
         <tr>
             <th scope="col">#</th>
             <th scope="col">Libellé de la tâche</th>
+            <th scope="col">Statut</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody *ngIf="todolist.length > 0; else elseBlock">
-        <tr *ngFor="let todo of todolist"><!-- Faire en sorte qu'il y ait autant de ligne que de tâche -->
-            <th scope="row">{{ todo.id}}</th>
-            <td>{{ todo.label}}</td>
+        <tr *ngFor="let todo of todolist" class="mr-2 {{ todo.isDone ? 'bg-white' : 'bg-light' }}">
+            <th scope="row {{ todo.isDone ? 'text-muted' : '' }}">{{ todo.id}}</th>
+            <td class="mr-2 {{ todo.isDone ? 'text-muted' : '' }}">{{ todo.label}}</td>
+            <td class="mr-2 {{ todo.isDone ? 'text-success' : 'text-danger' }}" [textContent]="todo.isDone ? 'Fait' : 'A faire !'"></td>
             <td>
-                <!-- Gérer l'événement clic sur ce bouton afin de rediriger vers l'édition -->
                 <button type="button" class="btn btn-outline-warning mr-2" (click)="goToEdit(todo.id)">Modifier</button>
-                <!-- Gérer l'événement clic sur ce bouton afin de supprimer la tâche -->
-                <button type="button" class="btn btn-outline-danger" (click)="deleteTodo(todo.id)">Supprimer</button>
+                <button type="button" class="btn {{ todo.isDone ? 'btn-outline-dark' : 'btn-outline-success' }} mr-2" (click)="switchIsDone(todo)" [textContent]="todo.isDone ? 'Marquer comme à faire' : 'Marquer comme fait'"></button>
+                <button type="button" class="btn btn-outline-danger" (click)="deleteTodo(todo.id)">Supprimer</button>                
             </td>
         </tr>
     </tbody>
     <ng-template #elseBlock>
         <tbody>
             <tr>
-                <td colspan="3" class="text-center">Aucune tâche pour le moment...</td>
+                <td colspan="4" class="text-center">Aucune tâche pour le moment...</td>
             </tr>
         </tbody>
     </ng-template>

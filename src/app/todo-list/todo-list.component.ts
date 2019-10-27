@@ -26,4 +26,9 @@ export class TodoListComponent implements OnInit {
     this.todolistService.delete(id);
     this.todolist = this.todolistService.getAll();
   }
+  
+  switchIsDone(todo){
+    this.todolistService.editIsDone(todo);
+    this.todolist = this.todolistService.getAll();
+  }
 }
